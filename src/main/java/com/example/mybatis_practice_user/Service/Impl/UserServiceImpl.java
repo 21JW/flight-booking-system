@@ -6,7 +6,9 @@ import com.example.mybatis_practice_user.model.dto.UserDTO;
 import com.example.mybatis_practice_user.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 
@@ -21,6 +23,12 @@ public class UserServiceImpl implements UserService {
         user.setCreateTime(new Date());
         user.setTs(new Date());
         userMapper.insert(user);
+    }
+
+    @Override
+    public void deleteUserById(Integer id){
+        //User user=userMapper.findById(id);
+        userMapper.deleteById(id);
     }
 }
 
