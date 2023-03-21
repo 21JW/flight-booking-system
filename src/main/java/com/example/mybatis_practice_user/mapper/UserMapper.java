@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Select;
 public interface UserMapper extends BaseMapper<User> {
     @Select("select * from demo_user2 where id = #{id}")
     User findById(@Param("id") Integer id);
+
+
 }

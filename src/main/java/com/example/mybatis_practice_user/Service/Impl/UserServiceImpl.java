@@ -27,7 +27,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(Integer id){
-        //User user=userMapper.findById(id);
+        User user = userMapper.findById(id);
+        if(user==null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
         userMapper.deleteById(id);
     }
 }

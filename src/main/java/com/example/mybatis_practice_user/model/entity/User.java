@@ -16,6 +16,7 @@ import java.util.Date;
 
 @Data
 @TableName(value = "demo_user2")
+@NoArgsConstructor
 public class User {
     @TableId(type = IdType.AUTO)
     Integer id;
