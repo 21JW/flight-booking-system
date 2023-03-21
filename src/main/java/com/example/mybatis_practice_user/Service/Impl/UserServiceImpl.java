@@ -18,6 +18,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(UserDTO dto) {
         User user=new User(dto);
+        user.setCreateTime(new Date());
+        user.setTs(new Date());
         userMapper.insert(user);
     }
 }

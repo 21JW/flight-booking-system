@@ -26,6 +26,15 @@ public class User {
 
     String email;
 
+    @Enumerated(EnumType.STRING)
+    UserStatus status;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="America/Toronto")
+    Date createTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="America/Toronto")
+    Date ts;
+
 
     public User(UserDTO dto) {
         BeanUtils.copyProperties(dto, this);
