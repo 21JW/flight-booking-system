@@ -1,5 +1,6 @@
 package com.example.mybatis_practice_user.controller;
 import com.example.mybatis_practice_user.Service.UserService;
+import com.example.mybatis_practice_user.model.dto.IdListDTO;
 import com.example.mybatis_practice_user.model.dto.UserDTO;
 import com.example.mybatis_practice_user.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -49,5 +52,11 @@ public class UserController {
     {
         User user=userService.getUserByEmail(email);
         return user;
+    }
+
+    @GetMapping("/ids")
+    public List<User> findUsersByIds(@RequestBody IdListDTO dto) {
+        List<User> response=userService.findUserByIdList(dto);
+        return response;
     }
 }

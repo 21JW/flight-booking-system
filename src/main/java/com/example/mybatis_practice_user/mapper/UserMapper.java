@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
     @Select("select * from demo_user2 where id = #{id}")
@@ -13,4 +15,6 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Select("select * from demo_user2 where email = #{email}")
     User findByEmail(@Param("email") String email);
+
+    List<User> findByIdList(List<Integer> idList);
 }

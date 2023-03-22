@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis_practice_user.mapper.UserMapper">
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO demo_user2
+        (username, password, email, status, create_time, ts)
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+            (#{item.username}, #{item.password}, #{item.email},#{item.status},#{item.createTime}, #{item.ts})
+        </foreach >
+    </insert>
+
+    <select id="findByIdList" resultType="com.example.mybatis_practice_user.model.entity.User">
+        select * from demo_user2 where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
