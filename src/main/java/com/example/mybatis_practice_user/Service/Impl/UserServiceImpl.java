@@ -6,6 +6,7 @@ import com.example.mybatis_practice_user.model.dto.IdListDTO;
 import com.example.mybatis_practice_user.model.dto.UserDTO;
 import com.example.mybatis_practice_user.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,12 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
     @Override
     public void addUser(UserDTO dto) {
+        if(userMapper.findByUserName(dto.getUsername())!=null){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "username has been registered");
+        }
+        if(userMapper.findByEmail(dto.getEmail())!=null){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "email has been registered");
+        }
         User user=new User(dto);
         user.setCreateTime(new Date());
         user.setTs(new Date());
@@ -60,6 +67,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email){
         User user = userMapper.findByEmail(email);
+        if(user==null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+        return user;
+    }
+
+
+    @Override
+    public User getUserByUserName(String username){
+        User user = userMapper.findByUserName(username);
         if(user==null)
         {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");

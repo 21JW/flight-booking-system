@@ -16,5 +16,8 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from demo_user2 where email = #{email}")
     User findByEmail(@Param("email") String email);
 
+    @Select("select * from demo_user2 where username = #{username}")
+    User findByUserName(@Param("username") String username);
+
     List<User> findByIdList(List<Integer> idList);
 }
