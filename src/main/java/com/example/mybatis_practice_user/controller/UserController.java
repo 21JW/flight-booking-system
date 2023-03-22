@@ -31,7 +31,7 @@ public class UserController {
         userService.deleteUserById(id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public User getUserById(@PathVariable Integer id)
     {
         User user=userService.getUserById(id);
@@ -41,6 +41,13 @@ public class UserController {
     @PutMapping("/{id}")
     public User updateUser(@RequestBody @Validated(UserDTO.Update.class) UserDTO dto, @PathVariable Integer id) {
         User user = userService.updateUserById(dto, id);
+        return user;
+    }
+
+    @GetMapping("/email/{email}")
+    public User getUserByEmail(@PathVariable String email)
+    {
+        User user=userService.getUserByEmail(email);
         return user;
     }
 }

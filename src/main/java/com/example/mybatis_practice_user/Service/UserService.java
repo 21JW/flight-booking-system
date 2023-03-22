@@ -12,5 +12,7 @@ public interface UserService {
 
     User updateUserById(UserDTO dto,Integer id);
 
+    User getUserByEmail(String email);
+
 
 }

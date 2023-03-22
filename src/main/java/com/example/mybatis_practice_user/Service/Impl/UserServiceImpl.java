@@ -55,6 +55,14 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-
+    @Override
+    public User getUserByEmail(String email){
+        User user = userMapper.findByEmail(email);
+        if(user==null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+        return user;
+    }
 }
 
