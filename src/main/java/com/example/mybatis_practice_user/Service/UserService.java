@@ -10,7 +10,7 @@ public interface UserService {
 
     User getUserById(Integer id);
 
-
+    User updateUserById(UserDTO dto,Integer id);
 
 
 }

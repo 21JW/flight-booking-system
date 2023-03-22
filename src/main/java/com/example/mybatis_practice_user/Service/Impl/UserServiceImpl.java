@@ -5,6 +5,7 @@ import com.example.mybatis_practice_user.mapper.UserMapper;
 import com.example.mybatis_practice_user.model.dto.UserDTO;
 import com.example.mybatis_practice_user.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,16 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    @Override
+    public User updateUserById(UserDTO dto, Integer id) {
+        User user = getUserById(id);
+        BeanUtils.copyProperties(dto, user);
+        user.setTs(new Date());
+        userMapper.updateById(user);
+        return user;
+    }
+
+
 }
 
