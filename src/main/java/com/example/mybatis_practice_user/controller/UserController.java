@@ -26,11 +26,17 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id)
+    public void deleteUserById(@PathVariable Integer id)
     {
         userService.deleteUserById(id);
     }
 
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Integer id)
+    {
+        User user=userService.getUserById(id);
+        return user;
+    }
 
 
 }

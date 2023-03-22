@@ -34,5 +34,15 @@ public class UserServiceImpl implements UserService {
         }
         userMapper.deleteById(id);
     }
+
+    @Override
+    public User getUserById(Integer id){
+        User user = userMapper.findById(id);
+        if(user==null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+        return user;
+    }
 }
 
