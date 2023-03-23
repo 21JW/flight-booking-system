@@ -3,6 +3,7 @@ package com.example.mybatis_practice_user.Service.Impl;
 import com.example.mybatis_practice_user.Service.FlightService;
 import com.example.mybatis_practice_user.mapper.FlightMapper;
 import com.example.mybatis_practice_user.model.dto.FlightDTO;
+import com.example.mybatis_practice_user.model.dto.FlightSearchDTO;
 import com.example.mybatis_practice_user.model.entity.Flight;
 import com.example.mybatis_practice_user.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -61,6 +63,12 @@ public class FlightServiceImpl implements FlightService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
         flightMapper.deleteById(id);
+    }
+
+    @Override
+    public List<Flight> searchFlight(FlightSearchDTO dto){
+        List<Flight> result=flightMapper.findFlight(dto.getDeparture(), dto.getDestination(),dto.getStartTime(),dto.getEndTime());
+        return result;
     }
 
 }

@@ -2,6 +2,8 @@ package com.example.mybatis_practice_user.controller;
 
 import com.example.mybatis_practice_user.Service.FlightService;
 import com.example.mybatis_practice_user.model.dto.FlightDTO;
+import com.example.mybatis_practice_user.model.dto.FlightSearchDTO;
+import com.example.mybatis_practice_user.model.dto.IdListDTO;
 import com.example.mybatis_practice_user.model.dto.UserDTO;
 import com.example.mybatis_practice_user.model.entity.Flight;
 import com.example.mybatis_practice_user.model.entity.User;
@@ -10,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/flight")
@@ -42,5 +46,11 @@ public class FlightController {
     public void deleteFlightById(@PathVariable Integer id)
     {
         flightService.deleteFlightById(id);
+    }
+
+    @GetMapping("/search")
+    public List<Flight> searchFlight(@RequestBody FlightSearchDTO dto) {
+        List<Flight> response=flightService.searchFlight(dto);
+        return response;
     }
 }
