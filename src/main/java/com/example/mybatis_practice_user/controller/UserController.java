@@ -15,12 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    private UserService userService;
-
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @PostMapping
     public ResponseEntity<?> Register(@RequestBody @Validated(UserDTO.Insert.class) UserDTO dto) {
