@@ -37,4 +37,10 @@ public class FlightController {
         Flight flight = flightService.updateFlightById(dto, id);
         return flight;
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteFlightById(@PathVariable Integer id)
+    {
+        flightService.deleteFlightById(id);
+    }
 }

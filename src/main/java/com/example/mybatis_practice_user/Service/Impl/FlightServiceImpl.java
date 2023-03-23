@@ -4,6 +4,7 @@ import com.example.mybatis_practice_user.Service.FlightService;
 import com.example.mybatis_practice_user.mapper.FlightMapper;
 import com.example.mybatis_practice_user.model.dto.FlightDTO;
 import com.example.mybatis_practice_user.model.entity.Flight;
+import com.example.mybatis_practice_user.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,16 @@ public class FlightServiceImpl implements FlightService {
         flight.setTs(new Date());
         flightMapper.updateById(flight);
         return flight;
+    }
+
+    @Override
+    public void deleteFlightById(Integer id){
+        Flight flight = flightMapper.findFlightById(id);
+        if(flight==null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+        flightMapper.deleteById(id);
     }
 
 }

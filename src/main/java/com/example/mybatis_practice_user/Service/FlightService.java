@@ -9,4 +9,6 @@ public interface FlightService {
     Flight getFlightById(Integer id);
 
     Flight updateFlightById(FlightDTO dto,Integer id);
+
+    void deleteFlightById(Integer id);
 }
