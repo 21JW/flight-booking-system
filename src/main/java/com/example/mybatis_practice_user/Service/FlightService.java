@@ -7,4 +7,6 @@ public interface FlightService {
     void addFlight(FlightDTO dto);
 
     Flight getFlightById(Integer id);
+
+    Flight updateFlightById(FlightDTO dto,Integer id);
 }

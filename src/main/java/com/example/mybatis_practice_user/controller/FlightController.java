@@ -31,4 +31,10 @@ public class FlightController {
         Flight flight=flightService.getFlightById(id);
         return flight;
     }
+
+    @PutMapping("/{id}")
+    public Flight updateFlight(@RequestBody @Validated(FlightDTO.Update.class) FlightDTO dto, @PathVariable Integer id) {
+        Flight flight = flightService.updateFlightById(dto, id);
+        return flight;
+    }
 }
