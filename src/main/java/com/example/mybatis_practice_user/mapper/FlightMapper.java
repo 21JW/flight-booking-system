@@ -18,6 +18,6 @@ public interface FlightMapper extends BaseMapper<Flight> {
 
     @Select("select * from flight where id = #{id}")
     Flight findFlightById(@Param("id")Integer id);
-    @Select("select * from flight where departure = #{departure} AND destination= #{destination} AND depart_time BETWEEN #{startTime} AND #{endTime}")
+    @Select("select * from flight where departure = #{departure} AND destination= #{destination} AND depart_time BETWEEN #{startTime} AND #{endTime} ORDER BY price")
     List<Flight> findFlight(@Param("departure")String departure,@Param("destination")String destination,@Param("startTime")Date startTime,@Param("endTime")Date endTime);
 }
