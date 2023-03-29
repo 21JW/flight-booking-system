@@ -20,4 +20,6 @@ public interface FlightMapper extends BaseMapper<Flight> {
     Flight findFlightById(@Param("id")Integer id);
     @Select("select * from flight where departure = #{departure} AND destination= #{destination} AND depart_time BETWEEN #{startTime} AND #{endTime} ORDER BY price")
     List<Flight> findFlight(@Param("departure")String departure,@Param("destination")String destination,@Param("startTime")Date startTime,@Param("endTime")Date endTime);
+
+    List<Flight> searchFlightByParams(@Param("params")FlightSearchDTO dto);
 }

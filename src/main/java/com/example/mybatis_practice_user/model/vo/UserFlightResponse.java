@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 public class UserFlightResponse {
     Integer id;
     String username;
@@ -14,10 +14,4 @@ public class UserFlightResponse {
 
     public interface Insert {}
 
-    public UserFlightResponse(Integer id,String username,String flightName) {
-        this.id=id;
-        this.username=username;
-        this.flightName=flightName;
-
-    }
 }

@@ -16,4 +16,6 @@ public interface FlightService {
     void deleteFlightById(Integer id);
 
     List<Flight> searchFlight(FlightSearchDTO dto);
+
+    List<Flight> searchFlightByParams(FlightSearchDTO dto);
 }

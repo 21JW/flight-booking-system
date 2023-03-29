@@ -53,4 +53,10 @@ public class FlightController {
         List<Flight> response=flightService.searchFlight(dto);
         return response;
     }
+
+    @GetMapping("/searchByParams")
+    public List<Flight> searchFlightByParams(@RequestBody FlightSearchDTO dto) {
+        List<Flight> response=flightService.searchFlightByParams(dto);
+        return response;
+    }
 }

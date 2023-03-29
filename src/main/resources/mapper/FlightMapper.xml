@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis_practice_user.mapper.FlightMapper">
+
+    <select id="searchFlightByParams" resultType="com.example.mybatis_practice_user.model.entity.Flight" useCache="false">
+        select f.*
+        from flight f
+        <where>
+            <if test="params.departure != null and params.departure != ''">
+                and f.departure = #{params.departure}
+            </if>
+
+            <if test="params.destination != null and params.destination != ''">
+                and f.destination = #{params.destination}
+            </if>
+
+            <if test="params.startTime != null">
+                and f.depart_time &gt; #{params.startTime}
+            </if>
+
+            <if test="params.endTime != null">
+                and f.depart_time &lt; #{params.endTime}
+            </if>
+
+            order by f.price
+
+        </where>
+    </select>
+</mapper>

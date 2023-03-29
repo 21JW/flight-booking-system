@@ -20,6 +20,7 @@ public class FlightDTO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Toronto")
     private Date departTime;
 
+
     public interface Update {}
 
     public interface Insert {}

@@ -71,4 +71,9 @@ public class FlightServiceImpl implements FlightService {
         return result;
     }
 
+    @Override
+    public List<Flight> searchFlightByParams(FlightSearchDTO dto){
+        return flightMapper.searchFlightByParams(dto);
+    }
+
 }
