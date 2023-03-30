@@ -5,10 +5,15 @@ import com.example.mybatis_practice_user.mapper.FlightMapper;
 import com.example.mybatis_practice_user.model.dto.FlightDTO;
 import com.example.mybatis_practice_user.model.dto.FlightSearchDTO;
 import com.example.mybatis_practice_user.model.entity.Flight;
+import com.example.mybatis_practice_user.model.entity.MongoFlight;
 import com.example.mybatis_practice_user.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,6 +27,8 @@ public class FlightServiceImpl implements FlightService {
 
     @Autowired
     FlightMapper flightMapper;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Override
     public void addFlight(FlightDTO dto){
@@ -33,6 +40,14 @@ public class FlightServiceImpl implements FlightService {
         flight.setCreateTime(new Date());
         flight.setTs(new Date());
         flightMapper.insert(flight);
+        // MongoDB add Flight
+        MongoFlight mongoFlight=new MongoFlight(flight.getId(), dto.getCapacity(), dto.getAvailable());
+        mongoFlight = mongoTemplate.insert(mongoFlight);
+        Query query = Query.query(Criteria.where("flightId").is(mongoFlight.getFlightId()));
+        Update update = new Update();
+        update.set("capacity", dto.getCapacity());
+        update.set("available", dto.getAvailable());
+        mongoTemplate.updateFirst(query, update, MongoFlight.class);
     }
 
     @Override

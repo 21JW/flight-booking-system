@@ -2,6 +2,7 @@ package com.example.mybatis_practice_user.controller;
 
 
 import com.example.mybatis_practice_user.Service.MongoFlightService;
+import com.example.mybatis_practice_user.model.dto.FlightDTO;
 import com.example.mybatis_practice_user.model.entity.MongoFlight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,6 @@ public class MongoFlightController {
     public MongoFlightController(MongoFlightService mongoFlightService)
     { this.mongoFlightService = mongoFlightService; }
 
-    @PostMapping()
-    public void saveMongoFlight(@RequestBody MongoFlight mongoFlight)
-    { mongoFlightService.saveFlight(mongoFlight); }
 
     @GetMapping("/{flightId}")
     public MongoFlight getMongoFlightByFlightId(@PathVariable Integer flightId)
@@ -26,6 +24,11 @@ public class MongoFlightController {
     @PutMapping("/addMongoFlight/{flightId}")
     public void addMongoFlight(@PathVariable Integer flightId) {
         mongoFlightService.addMongoFlight(flightId);
+    }
+
+    @PutMapping("/declineMongoFlight/{flightId}")
+    public void declineMongoFlight(@PathVariable Integer flightId) {
+        mongoFlightService.declineMongoFlight(flightId);
     }
 
 

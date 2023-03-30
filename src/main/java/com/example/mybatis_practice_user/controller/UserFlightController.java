@@ -19,6 +19,11 @@ public class UserFlightController {
         userFlightService.addUserFlight(dto);
     }
 
+    @DeleteMapping("/{userId}/{flightId}")
+    public void deleteUserFlight(@PathVariable Integer userId,@PathVariable Integer flightId) {
+        userFlightService.deleteUserFlight(userId,flightId);
+    }
+
     @GetMapping
     public List<UserFlightResponse> getAllUserFlightResponse(){
         return userFlightService.findAllUserFlightResponse();

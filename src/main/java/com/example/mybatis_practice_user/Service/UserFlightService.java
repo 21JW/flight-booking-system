@@ -8,6 +8,8 @@ import java.util.List;
 public interface UserFlightService {
     void addUserFlight(UserFlightDTO dto);
 
+    void deleteUserFlight(Integer userId,Integer flightId);
+
     List<UserFlightResponse> findAllUserFlightResponse();
 
 

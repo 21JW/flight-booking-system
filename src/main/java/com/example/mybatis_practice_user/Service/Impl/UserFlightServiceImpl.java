@@ -1,6 +1,7 @@
 package com.example.mybatis_practice_user.Service.Impl;
 
 import com.example.mybatis_practice_user.Service.FlightService;
+import com.example.mybatis_practice_user.Service.MongoFlightService;
 import com.example.mybatis_practice_user.Service.UserFlightService;
 import com.example.mybatis_practice_user.Service.UserService;
 import com.example.mybatis_practice_user.mapper.UserFlightMapper;
@@ -23,11 +24,14 @@ public class UserFlightServiceImpl implements UserFlightService {
     private UserService userService;
     private FlightService flightService;
 
+    private MongoFlightService mongoFlightService;
+
     @Autowired
-    public UserFlightServiceImpl(UserFlightMapper userFlightMapper, UserService userService, FlightService flightService) {
+    public UserFlightServiceImpl(UserFlightMapper userFlightMapper, UserService userService, FlightService flightService,MongoFlightService mongoFlightService) {
         this.userFlightMapper = userFlightMapper;
         this.userService = userService;
         this.flightService = flightService;
+        this.mongoFlightService=mongoFlightService;
     }
 
     @Override
@@ -44,6 +48,8 @@ public class UserFlightServiceImpl implements UserFlightService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "this flight has been chosen");
         }
 
+        mongoFlightService.addMongoFlight(flightId);
+
         UserFlight userFlight = new UserFlight(dto);
 
         userFlight.setCreateTime(new Date());
@@ -58,5 +64,15 @@ public class UserFlightServiceImpl implements UserFlightService {
         return userFlightMapper.findUserFlightResponse();
     }
 
+    @Override
+    public void deleteUserFlight(Integer userId,Integer flightId){
+        UserFlight existingRecord = userFlightMapper.findByUserIdANDFlightId(userId, flightId);
+        if(existingRecord==null)
+        {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Not Found");
+        }
+        mongoFlightService.declineMongoFlight(flightId);
+        userFlightMapper.deleteById(existingRecord.getId());
+    }
 
 }
