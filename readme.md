@@ -62,6 +62,16 @@ this table stores the basic information of user_flight
 | create_time | datetime | | | | the time that this row was inserted |
 | ts | datetime | | | | the last time that created or modified this row |
 
+### mongo_flight
+
+this table stores the basic information of flight booking status
+
+| Field | Type | Key | Nullable | Unique | Note |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| flightId | char(36) | Yes | | Yes | primary key |
+| capacity | char(36) | | Yes | | passengers capacity of this flight |
+| available | char(36) | | Yes | | the remaining capacity of this flight |
+
 ## Logic
 
 ### flight
