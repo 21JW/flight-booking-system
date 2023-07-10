@@ -9,6 +9,7 @@
 ## Technologies used
 * Spring Boot 2.2.2
 * MyBatis
+* MongoDB
 
 ## How to run this project
 * Clone this project in IntelliJ IDEA;
@@ -89,5 +90,23 @@ Before **inserting** an user_fligth in record, back-end should check:
 1. whether the user has booked that flight✔
 2. whether all fields except note are not null and valid. ✔
 
+### user_flight
+
 ## APIs
 
+### flight
+1. add flight
+2. get flight by id
+3. update flight by id
+4. Search flight by departure, destination,start time, end time and order by price.
+
+### user
+1. add user
+2. get user by id or email
+3. update user by id
+4. get user by idlist
+
+### user_flight
+1. add user_flight(connect user with a flight)
+2. delete user_flight(disconnect user with a flight)
+3. get all user_flights responses
