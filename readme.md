@@ -1,18 +1,83 @@
 ## Flight Booking System
 
+
 ## Prerequisites
-*Java 8
-*MySQL 8.0.15 or higher version
-*Maven
+* Java 8
+* MySQL 8.0.15 or higher version
+* Maven
 
 ## Technologies used
-*Spring Boot 2.2.2
-*MyBatis
+* Spring Boot 2.2.2
+* MyBatis
 
 ## How to run this project
-*Clone this project in IntelliJ IDEA;
-*Modify \src\main\resources\application.properties: replace spring.datasource.username and spring.datasource.password with your MySQL's username and password respectively;
-*Make sure there is no database called mybatis_template in MySQL;
-*Run \src\main\java\com\example\mybatis_practice_user\MybatisPracticeUserApplication.java (tables will be created automatically).
+* Clone this project in IntelliJ IDEA;
+* Modify`\src\main\resources\application.properties`: replace `spring.datasource.username` and `spring.datasource.password` with your MySQL's username and password respectively;
+* Make sure there is no database called `mybatis_template` in MySQL;
+* Run `\src\main\java\com\example\mybatis_practice_user\MybatisPracticeUserApplication.java` (tables will be created automatically).
 
+## Tables
+
+Three tables are created for this project, which are **flight**, **demo_user2** and **user_flight**.
+
+### flight
+
+this table stores the basic information of flight
+
+| Field | Type | Key | Nullable | Unique | Note |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| id | char(36) | Yes | | Yes | primary key |
+| company | varchar(255) | | Yes | |company name|
+| flight_name | varchar(20) | | Yes | Yes | each flight_name has a unique code |
+| departure | varchar(255) | | Yes | | departure city |
+| destination | varchar(255) | | Yes | | destination city|
+| create_time | datetime | | | | the time that this row was inserted |
+| ts | datetime | | | | the last time that created or modified this row |
+| price | INT | | Yes | | flight price |
+| depart_time | datetime | | | | the time that the flight departs |
+
+### demo_user2
+
+this table stores the basic information of user
+
+| Field | Type | Key | Nullable | Unique | Note |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| id | char(36) | Yes | | Yes | primary key |
+| username | varchar(20) | | Yes | Yes | username |
+| password | varchar(20) | | Yes | | password |
+| email | varchar(20) | | Yes | Yes | email address |
+| status | varchar(255) | | | | whether this account is active or not |
+| create_time | datetime | | | | the time that this row was inserted |
+| ts | datetime | | | | the last time that created or modified this row |
+
+### user_flight
+
+this table stores the basic information of user_flight
+
+| Field | Type | Key | Nullable | Unique | Note |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| id | char(36) | Yes | | Yes | primary key |
+| user_id | char(36) | | Yes | | the id of user who takes this flight |
+| flight_id | char(36) | | Yes | | the id of flight which is taken by a user |
+| create_time | datetime | | | | the time that this row was inserted |
+| ts | datetime | | | | the last time that created or modified this row |
+
+## Logic
+
+### flight
+Before **inserting** a flight in record, back-end should check:
+1. whether fligth_name and its depart time exist or not; ✔
+2. whether all fields except note are not null and valid. ✔
+
+### user
+Before **inserting** an user in record, back-end should check:
+1. whether username and email address exist or not; ✔
+2. whether all fields except note are not null and valid. ✔
+
+### user_flight
+Before **inserting** an user_fligth in record, back-end should check:
+1. whether the user has booked that flight✔
+2. whether all fields except note are not null and valid. ✔
+
+## APIs
 
