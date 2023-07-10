@@ -90,7 +90,11 @@ Before **inserting** an user_fligth in record, back-end should check:
 1. whether the user has booked that flight✔
 2. whether all fields except note are not null and valid. ✔
 
-### user_flight
+### mongo_flight
+Before **inserting** an user_fligth in record, back-end should check:
+1. whether the flight is created✔
+2. whether all fields except note are not null and valid. ✔
+
 
 ## APIs
 
@@ -106,7 +110,9 @@ Before **inserting** an user_fligth in record, back-end should check:
 3. update user by id
 4. get user by idlist
 
-### user_flight
+### user_flight & mongo_flight
 1. add user_flight(connect user with a flight)
 2. delete user_flight(disconnect user with a flight)
+the above two APIs use MongoDB to check flights' availability  
 3. get all user_flights responses
+
