@@ -80,7 +80,7 @@ Before **inserting** a flight in record, back-end should check:
 1. whether fligth_name and its depart time exist or not; ✔
 2. whether all fields except note are not null and valid. ✔
 
-### user
+### demo_user2
 Before **inserting** an user in record, back-end should check:
 1. whether username and email address exist or not; ✔
 2. whether all fields except note are not null and valid. ✔
